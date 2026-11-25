@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://selah-software.github.io/hushpad/sitemap.xml

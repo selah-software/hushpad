@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private, offline dictation for Mac | Hushpad</title>
+<meta name="description" content="Hushpad is private dictation for Mac: speech recognition and AI cleanup run entirely on your computer, work offline, and need no account. 7-day free trial.">
+<link rel="canonical" href="https://selah-software.github.io/hushpad/private-dictation-for-mac.html">
+<meta property="og:title" content="Private, offline dictation for Mac | Hushpad">
+<meta property="og:description" content="Hushpad is private dictation for Mac: speech recognition and AI cleanup run entirely on your computer, work offline, and need no account. 7-day free trial.">
+<meta property="og:image" content="https://selah-software.github.io/hushpad/icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+:root{
+  --bg:#fbfaff; --surface:#ffffff; --ink:#1b1830; --muted:#5d5878; --line:#e7e3f5;
+  --accent:#6d3ff0; --accent-2:#9b4dff; --accent-soft:#f1ecff; --ok:#1f9d6b;
+  --shadow:0 1px 2px rgba(30,20,70,.05),0 8px 28px rgba(60,30,140,.08);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#100e1a; --surface:#1a1729; --ink:#f1eefc; --muted:#a7a1c4; --line:#2c2842;
+    --accent:#9a7bff; --accent-2:#b98cff; --accent-soft:#241e3d; --ok:#4cd39b;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{line-height:1.2;letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(26px,4vw,34px);margin-bottom:12px}
+section{padding:72px 0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.lead{color:var(--muted);font-size:18px;max-width:640px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+.brand img{width:30px;height:30px;border-radius:7px}
+nav .links{display:flex;gap:22px;align-items:center}
+nav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+nav .links a:hover{color:var(--ink)}
+nav .links a.btn-primary{color:#fff}
+@media (max-width:640px){nav .links a.hide-sm{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;
+  font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .12s ease,box-shadow .12s ease}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 6px 18px rgba(109,63,240,.3)}
+.btn-primary:hover{box-shadow:0 8px 24px rgba(109,63,240,.42)}
+.btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-sm{padding:8px 14px;font-size:14px;border-radius:10px}
+
+/* hero */
+.hero{padding:84px 0 56px;text-align:center}
+.hero .icon{width:96px;height:96px;border-radius:22px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(36px,6.4vw,60px);margin:22px auto 16px;max-width:820px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin:0 auto 30px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.fine{color:var(--muted);font-size:14px;margin-top:16px}
+
+/* demo */
+.demo{margin:56px auto 0;max-width:720px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;text-align:left}
+.demo .bar{display:flex;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.demo .bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.demo .body{padding:22px 24px 30px;display:grid;gap:16px}
+.said{color:var(--muted);font-style:italic;font-size:15px}
+.said b{font-style:normal;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.got b{font-weight:600;color:var(--accent);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.pill{justify-self:center;display:inline-flex;align-items:center;gap:10px;background:#16131f;color:#fff;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:500}
+.pill .bars{display:flex;gap:3px;align-items:center;height:16px}
+.pill .bars span{width:3px;border-radius:2px;background:#b9a3ff;animation:b 1s ease-in-out infinite}
+.pill .bars span:nth-child(1){height:6px;animation-delay:-.2s}
+.pill .bars span:nth-child(2){height:14px;animation-delay:-.5s}
+.pill .bars span:nth-child(3){height:10px;animation-delay:-.1s}
+.pill .bars span:nth-child(4){height:15px;animation-delay:-.7s}
+.pill .bars span:nth-child(5){height:7px;animation-delay:-.35s}
+@keyframes b{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.pill .bars span{animation:none}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.step .n{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;margin-bottom:14px}
+.step h3{font-size:19px;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:16px}
+kbd{font:600 14px/1 inherit;background:var(--accent-soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--ink)}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.feat{padding:22px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.feat h3{font-size:17px;margin-bottom:6px}
+.feat p{margin:0;color:var(--muted);font-size:15.5px}
+.feat code{font:inherit;color:var(--ink);background:var(--accent-soft);border-radius:5px;padding:0 5px}
+
+/* privacy */
+.privacy{background:linear-gradient(135deg,#2a1670,#5b2bd6);color:#fff;border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.privacy .eyebrow{color:#cdbbff}
+.privacy p{color:#e4dcff}
+.privacy ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.privacy li{display:flex;gap:12px;color:#f3eeff}
+.privacy li svg{flex:none;margin-top:3px}
+
+/* pricing */
+.price-card{max-width:520px;margin:32px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:36px;box-shadow:var(--shadow);text-align:center}
+.price{font-size:56px;font-weight:800;letter-spacing:-.03em}
+.price small{font-size:18px;font-weight:500;color:var(--muted)}
+.checks{list-style:none;padding:0;margin:22px 0 28px;text-align:left;display:grid;gap:10px}
+.checks li{display:flex;gap:10px}
+.checks svg{flex:none;margin-top:4px;color:var(--ok)}
+
+/* install + reqs */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.card h3{font-size:19px;margin-bottom:12px}
+.card ol,.card ul{margin:0;padding-left:20px;color:var(--muted)}
+.card li{margin-bottom:8px}
+.card li b{color:var(--ink)}
+
+/* faq */
+.faq{max-width:760px;margin-top:28px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .steps,.features{grid-template-columns:1fr 1fr}
+  .privacy{grid-template-columns:1fr;padding:32px 24px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  section{padding:56px 0}
+  .hero{padding:56px 0 40px}
+  .steps,.features,.two{grid-template-columns:1fr}
+  .cta .btn{flex:1 1 100%}
+  .demo .body{padding:18px}
+  .price-card{padding:28px 20px}
+}
+</style>
+<style>
+.page{max-width:820px;margin:0 auto;padding:64px 20px}
+.page h1{font-size:clamp(32px,5vw,46px);margin:10px 0 16px}
+.page h2{font-size:26px;margin:44px 0 12px}
+.page p,.page li{color:var(--muted)}
+.page li{margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15.5px}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--accent-soft);color:var(--ink)}
+td:first-child{font-weight:600;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+.cta-box{margin-top:44px;padding:28px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-align:center}
+.cta-box p{margin:0 0 18px}
+.table-wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.png" alt="">Hushpad</a>
+    <div class="links">
+      <a class="hide-sm" href="./#features">Features</a>
+      <a class="hide-sm" href="./#privacy">Privacy</a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/selah-software/hushpad/releases/latest/download/Hushpad.dmg">Free trial</a>
+    </div>
+  </div>
+</nav>
+<main class="page">
+  <div class="eyebrow">Private dictation</div>
+  <h1>Dictation for Mac that never uploads your voice</h1>
+  <p class="lead">Many AI dictation apps send your recordings to a server to be transcribed. Hushpad doesn't. Speech recognition (Whisper) and the AI that cleans up your text both run on your own Mac, so what you say stays on your computer.</p>
+  <div class="table-wrap"><table>
+    <tr><th></th><th>Hushpad</th><th>Typical cloud dictation</th></tr>
+    <tr><td>Voice recordings uploaded</td><td>Never</td><td>Usually, for transcription</td></tr><tr><td>Works with no internet</td><td>Yes, after setup</td><td>Usually not</td></tr><tr><td>Account or sign-in</td><td>None</td><td>Usually required</td></tr><tr><td>Analytics and tracking</td><td>None</td><td>Varies</td></tr><tr><td>History storage</td><td>Encrypted on your Mac, key in your Keychain</td><td>Varies</td></tr>
+  </table></div>
+  <h2>What goes over the internet</h2><p>Only two things: checking your license key, and checking for app updates. Nothing you say or write is ever sent.</p><h2>Who it's for</h2><p>Anyone who writes a lot and cares where their words go: people handling client or patient details, writers, pastors and ministry staff, and anyone who'd rather not have a recording of their voice on someone else's server.</p><h2>What Hushpad does</h2><ul><li>Removes “um”s, repeats and false starts, and fixes punctuation and capitals.</li><li>Formats lists, times, money and email addresses the way you meant them.</li><li>Handles changes of mind: “meet at 3, no wait, 4” becomes “Meet at 4.”</li><li>Lets you edit highlighted text by voice: “make this more polite,” “shorten this.”</li><li>Learns names you correct, and inserts snippets like “my signature.”</li><li>Keeps an encrypted, searchable history of everything you've dictated.</li></ul><h2>What you need</h2><p>A Mac with Apple Silicon (M1 or newer) on macOS 13 or later, about 6 GB of free space for the on-device AI models, and 16 GB of memory recommended. Hushpad works in English.</p>
+  <div class="cta-box">
+    <p>Try every feature free for 7 days. No account, no monthly subscription.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/selah-software/hushpad/releases/latest/download/Hushpad.dmg">Download the free trial</a>
+      <a class="btn btn-ghost" href="./">See how Hushpad works</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Selah Software</span>
+    <span><a href="./">Hushpad home</a> · <a href="mailto:selahsoftware7@gmail.com">selahsoftware7@gmail.com</a></span>
+  </div>
+</footer>
+</body>
+</html>
