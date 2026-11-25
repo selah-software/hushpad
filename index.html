@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hushpad — Private dictation for Mac</title>
+<meta name="description" content="Talk instead of type, privately, right on your Mac. Hushpad turns your voice into clean, ready-to-send writing in any app. No account, no subscription, nothing uploaded.">
+<meta property="og:title" content="Hushpad — Private dictation for Mac">
+<meta property="og:description" content="Talk instead of type. Clean, punctuated writing in any app, and your voice never leaves your Mac. $20 once.">
+<meta property="og:image" content="https://selah-software.github.io/hushpad/icon.png">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC2UlEQVR42uVXy2sTQRz+ZjaPdptKfVStacmlHvQgQUFEKIaK56x660HjQRT1ICoeFA8+UIog4kmKqAUvomKCeFMQ79K/oAcVa+OjeRibGpJddza7ySYz+4ia9uCEMDuzs/P95jfffL/5UaxwoSttQEDUuXfHzGECVSEaVSghupUExKxb2sYzxO/MNvtJlKT1vvTU29h0OxaxNxKJmQGpqD7QP1KIw4SdgtPWdjosRY7cfrM6L/RAl8FZrdSwyKD2cxwY3/4u1WXw+rNGlNOJzynOAGZd18Gb7xRuC3TLkssEzuokZ8Ayghtt3oBlBGc1xwERwNa4jAOH1qJXljoG75Up9k30Y3RbWDiWJ6Fg5bvHVyG+qw9Dw6GOVz4YDWLLzjDie3q4sUTkAZHbLa1i7TOTm3Dl/ogn+Pmp9Th6bY3ZZ83Ae8+ZA7Y9J0ZdfxeNhRqGDg4FsVTSjD9ryxGKSL+EXFZFj6y7PxaoL0CwcurKgTbCfflUxa+yikKu1hBuNuHkk2Gcu7OhsfLj19fh8uONhiHEHFjKaaiUNSzM1YQEdziGrWR89bSA18+K9Q9IcxwrI5tDjdVZ07E+00qUFjRMXyw6ni7BFrgfNStytTCYtLqT2MKbl67wSuhxzomNkHYDTKa0eIf40BUhCd2O2vz7qkFIu4q1bwF7+vqhhsqi5ilqvqTYzuC7F77xKmYRijQNeHTphy9F9ZRiN5Fp9xrx4pGA4K4c8NJ2Jw6gg1jiyAE/gaVcUjE3W8XYQdmYqi5KKrKzqu9AJuSA36h2Y+I7oqNBHLs1YHx772wRz2+qqPyE7yjKb0EHIXWpBOR12WWrZqWQ1ToCF3KAUmSoeSvyE88L8xquKvk/vD8gw8WCAKS0X/C/zhMkKS3MC06MfWQJRLKb4HqdOfUyqAhTs5AUSVFKMt0E7wsGUo6ZkVXYvZ1dndnt9d+AI8PcfvJF4KFravZfZse/Afo8nhxrU4oQAAAAAElFTkSuQmCC">
+<style>
+:root{
+  --bg:#fbfaff; --surface:#ffffff; --ink:#1b1830; --muted:#5d5878; --line:#e7e3f5;
+  --accent:#6d3ff0; --accent-2:#9b4dff; --accent-soft:#f1ecff; --ok:#1f9d6b;
+  --shadow:0 1px 2px rgba(30,20,70,.05),0 8px 28px rgba(60,30,140,.08);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#100e1a; --surface:#1a1729; --ink:#f1eefc; --muted:#a7a1c4; --line:#2c2842;
+    --accent:#9a7bff; --accent-2:#b98cff; --accent-soft:#241e3d; --ok:#4cd39b;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{line-height:1.2;letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(26px,4vw,34px);margin-bottom:12px}
+section{padding:72px 0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.lead{color:var(--muted);font-size:18px;max-width:640px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+.brand img{width:30px;height:30px;border-radius:7px}
+nav .links{display:flex;gap:22px;align-items:center}
+nav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+nav .links a:hover{color:var(--ink)}
+nav .links a.btn-primary{color:#fff}
+@media (max-width:640px){nav .links a.hide-sm{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;
+  font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .12s ease,box-shadow .12s ease}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 6px 18px rgba(109,63,240,.3)}
+.btn-primary:hover{box-shadow:0 8px 24px rgba(109,63,240,.42)}
+.btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-sm{padding:8px 14px;font-size:14px;border-radius:10px}
+
+/* hero */
+.hero{padding:84px 0 56px;text-align:center}
+.hero .icon{width:96px;height:96px;border-radius:22px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(36px,6.4vw,60px);margin:22px auto 16px;max-width:820px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin:0 auto 30px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.fine{color:var(--muted);font-size:14px;margin-top:16px}
+
+/* demo */
+.demo{margin:56px auto 0;max-width:720px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;text-align:left}
+.demo .bar{display:flex;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.demo .bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.demo .body{padding:22px 24px 30px;display:grid;gap:16px}
+.said{color:var(--muted);font-style:italic;font-size:15px}
+.said b{font-style:normal;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.got b{font-weight:600;color:var(--accent);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.pill{justify-self:center;display:inline-flex;align-items:center;gap:10px;background:#16131f;color:#fff;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:500}
+.pill .bars{display:flex;gap:3px;align-items:center;height:16px}
+.pill .bars span{width:3px;border-radius:2px;background:#b9a3ff;animation:b 1s ease-in-out infinite}
+.pill .bars span:nth-child(1){height:6px;animation-delay:-.2s}
+.pill .bars span:nth-child(2){height:14px;animation-delay:-.5s}
+.pill .bars span:nth-child(3){height:10px;animation-delay:-.1s}
+.pill .bars span:nth-child(4){height:15px;animation-delay:-.7s}
+.pill .bars span:nth-child(5){height:7px;animation-delay:-.35s}
+@keyframes b{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.pill .bars span{animation:none}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.step .n{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;margin-bottom:14px}
+.step h3{font-size:19px;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:16px}
+kbd{font:600 14px/1 inherit;background:var(--accent-soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--ink)}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.feat{padding:22px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.feat h3{font-size:17px;margin-bottom:6px}
+.feat p{margin:0;color:var(--muted);font-size:15.5px}
+.feat code{font:inherit;color:var(--ink);background:var(--accent-soft);border-radius:5px;padding:0 5px}
+
+/* privacy */
+.privacy{background:linear-gradient(135deg,#2a1670,#5b2bd6);color:#fff;border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.privacy .eyebrow{color:#cdbbff}
+.privacy p{color:#e4dcff}
+.privacy ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.privacy li{display:flex;gap:12px;color:#f3eeff}
+.privacy li svg{flex:none;margin-top:3px}
+
+/* pricing */
+.price-card{max-width:520px;margin:32px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:36px;box-shadow:var(--shadow);text-align:center}
+.price{font-size:56px;font-weight:800;letter-spacing:-.03em}
+.price small{font-size:18px;font-weight:500;color:var(--muted)}
+.checks{list-style:none;padding:0;margin:22px 0 28px;text-align:left;display:grid;gap:10px}
+.checks li{display:flex;gap:10px}
+.checks svg{flex:none;margin-top:4px;color:var(--ok)}
+
+/* install + reqs */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.card h3{font-size:19px;margin-bottom:12px}
+.card ol,.card ul{margin:0;padding-left:20px;color:var(--muted)}
+.card li{margin-bottom:8px}
+.card li b{color:var(--ink)}
+
+/* faq */
+.faq{max-width:760px;margin-top:28px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .steps,.features{grid-template-columns:1fr 1fr}
+  .privacy{grid-template-columns:1fr;padding:32px 24px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  section{padding:56px 0}
+  .hero{padding:56px 0 40px}
+  .steps,.features,.two{grid-template-columns:1fr}
+  .cta .btn{flex:1 1 100%}
+  .demo .body{padding:18px}
+  .price-card{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="data:image/png;base64,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" alt="">Hushpad</a>
+    <div class="links">
+      <a class="hide-sm" href="#features">Features</a>
+      <a class="hide-sm" href="#privacy">Privacy</a>
+      <a class="hide-sm" href="#faq">FAQ</a>
+      <a class="btn btn-primary btn-sm" href="https://selahsoftware.gumroad.com/l/hushpad">Buy — $20</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="icon" src="data:image/png;base64,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" alt="Hushpad app icon">
+    <h1>Talk instead of type. <span>Privately, on your Mac.</span></h1>
+    <p class="lead">Hold a key, speak naturally, let go. Your words appear wherever you were typing, already punctuated and cleaned up. Nothing you say ever leaves your Mac.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://selahsoftware.gumroad.com/l/hushpad">Get Hushpad — $20 once</a>
+      <a class="btn btn-ghost" href="https://github.com/selah-software/hushpad/releases/latest/download/Hushpad.dmg">Download free 7-day trial</a>
+    </div>
+    <p class="fine">For Macs with Apple Silicon · macOS 13 or later · No account, no subscription</p>
+
+    <div class="demo" aria-label="Example of Hushpad cleaning up speech">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="said"><b>You say</b>“um so let's meet at three no wait at four and uh bring the the budget numbers new paragraph thanks”</div>
+        <div class="pill"><span class="bars"><span></span><span></span><span></span><span></span><span></span></span>Listening…</div>
+        <div class="got"><b>Hushpad writes</b>Let's meet at 4, and bring the budget numbers.<br><br>Thanks!</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>Three steps. Any app.</h2>
+    <p class="lead">Email, Messages, Slack, Word, Google Docs, Notion, ChatGPT, your browser. If you can type there, you can talk there.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Click</h3><p>Put your cursor where you want to write, in any app.</p></div>
+      <div class="step"><div class="n">2</div><h3>Hold &amp; talk</h3><p>Hold <kbd>fn</kbd> (or any key you choose) and speak naturally.</p></div>
+      <div class="step"><div class="n">3</div><h3>Let go</h3><p>About a second later, clean, properly punctuated text appears.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Features</div>
+    <h2>More than dictation.</h2>
+    <p class="lead">Hushpad keeps your words and your tone. It just takes out the mess.</p>
+    <div class="features">
+      <div class="feat"><h3>Cleans up as you go</h3><p>Removes “um”s, repeats and false starts, and fixes grammar, punctuation and capitals.</p></div>
+      <div class="feat"><h3>Formats what you meant</h3><p>“Number one… number two…” becomes a list. “Fifty dollars” becomes <code>$50</code>. “Three thirty pm” becomes <code>3:30 PM</code>.</p></div>
+      <div class="feat"><h3>Handles changed minds</h3><p>Say “at three, no wait, at four” and Hushpad simply writes “at 4.”</p></div>
+      <div class="feat"><h3>Edit with your voice</h3><p>Highlight text, hold <kbd>Shift</kbd>+<kbd>fn</kbd>, and say “make this more polite,” “shorten this,” or “translate to Spanish.”</p></div>
+      <div class="feat"><h3>Write from scratch</h3><p>“Write a quick text saying I'm running ten minutes late,” and it appears at your cursor.</p></div>
+      <div class="feat"><h3>Ask about any text</h3><p>Highlight something and ask a question. The answer pops up, and your text stays untouched.</p></div>
+      <div class="feat"><h3>Snippets</h3><p>Say “my signature” or “my address” to insert text you use all the time.</p></div>
+      <div class="feat"><h3>Learns your words</h3><p>Add names and terms once. Correct a name it got wrong, and it remembers next time.</p></div>
+      <div class="feat"><h3>Never loses a word</h3><p>A searchable, encrypted history of every dictation, backed up daily. Copy, edit or redo anything.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" style="padding-top:0">
+  <div class="wrap">
+    <div class="privacy">
+      <div>
+        <div class="eyebrow">Private by design</div>
+        <h2>Your voice stays yours.</h2>
+        <p>Speech recognition and the writing AI both run on your own Mac. After a one-time setup download, Hushpad works with no internet at all.</p>
+      </div>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#bfa9ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Nothing you say or write is ever uploaded.</li>
+        <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#bfa9ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>No account, no analytics, no tracking.</li>
+        <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#bfa9ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>It only listens while you hold the key.</li>
+        <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#bfa9ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>History and recordings are encrypted, with the key in your Mac's Keychain.</li>
+        <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#bfa9ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>The internet is used only to check your license and look for updates.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow">Pricing</div>
+    <h2>Pay once. Keep it.</h2>
+    <div class="price-card">
+      <div class="price">$20 <small>one time</small></div>
+      <ul class="checks">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No subscription and no word limits</li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Use it on 2 Macs, like a desktop and a laptop</li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Free updates to this version</li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Try every feature free for 7 days</li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>7-day money-back guarantee</li>
+      </ul>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://selahsoftware.gumroad.com/l/hushpad">Buy Hushpad</a>
+        <a class="btn btn-ghost" href="https://github.com/selah-software/hushpad/releases/latest/download/Hushpad.dmg">Try it free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Getting started</div>
+    <h2>Installing Hushpad</h2>
+    <div class="two">
+      <div class="card">
+        <h3>Opening it the first time</h3>
+        <ol>
+          <li>Open <b>Hushpad.dmg</b> and drag Hushpad into <b>Applications</b>.</li>
+          <li>Open Hushpad. When macOS says it can't verify it, click <b>Done</b>.</li>
+          <li>Open <b>System Settings → Privacy &amp; Security</b>, scroll down, and click <b>Open Anyway</b>.</li>
+          <li>Enter your Mac password. Hushpad opens, and you won't see this again.</li>
+        </ol>
+        <p style="color:var(--muted);font-size:14.5px;margin:14px 0 0">Hushpad is made by a small independent developer, so macOS asks you to approve it once.</p>
+      </div>
+      <div class="card">
+        <h3>What you need</h3>
+        <ul>
+          <li>A Mac with <b>Apple Silicon</b> (M1 or newer)</li>
+          <li><b>macOS 13</b> Ventura or later</li>
+          <li>About <b>6 GB</b> free. Hushpad downloads its AI models (about 5.3 GB) once, on first launch.</li>
+          <li><b>16 GB</b> of memory recommended</li>
+          <li>Works in English</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2>Frequently asked</h2>
+    <div class="faq">
+      <details><summary>Do I need an internet connection?</summary><p>Only once, to download the AI models during setup. After that, dictation works completely offline.</p></details>
+      <details><summary>Is my voice recorded or uploaded?</summary><p>Hushpad only listens while you hold your key. Recordings stay on your Mac, encrypted, so you can replay or redo a dictation. They're never uploaded.</p></details>
+      <details><summary>How is this different from the Mac's built-in dictation?</summary><p>Hushpad is more accurate, cleans up your speech, formats lists, times and money, lets you edit text with your voice, learns your names, and keeps a full history of everything you've said.</p></details>
+      <details><summary>What happens after the free trial?</summary><p>After 7 days, Hushpad asks for a license key. Buy one on Gumroad, paste it in, and you're set. Nothing you dictated during the trial is lost.</p></details>
+      <details><summary>Can I move it to a new Mac?</summary><p>Yes. Your license works on 2 Macs, and reinstalling on the same Mac doesn't use up a spot. To move it to a different Mac, email <a href="mailto:selahsoftware7@gmail.com">selahsoftware7@gmail.com</a>.</p></details>
+      <details><summary>What if I have a problem?</summary><p>Email <a href="mailto:selahsoftware7@gmail.com">selahsoftware7@gmail.com</a> and we'll help.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Selah Software</span>
+    <span><a href="mailto:selahsoftware7@gmail.com">selahsoftware7@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
